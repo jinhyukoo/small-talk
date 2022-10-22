@@ -1,15 +1,15 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isDevMode = process.env.NODE_ENV !== 'production';
+const isDevMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  mode: isDevMode ? 'development' : 'production',
-  entry: './src/index.tsx',
+  mode: isDevMode ? "development" : "production",
+  entry: "./src/index.tsx",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
   devServer: {
     open: true,
@@ -18,8 +18,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: path.resolve(__dirname, './public/index.html'),
+      filename: "index.html",
+      template: path.resolve(__dirname, "./public/index.html"),
     }),
   ].concat(isDevMode ? [] : [new MiniCssExtractPlugin()]),
   module: {
@@ -27,15 +27,15 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
+          isDevMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
         ],
       },
       {
         test: /\.html$/i,
         use: {
-          loader: 'html-loader',
+          loader: "html-loader",
           options: {
             minimize: true,
           },
@@ -43,16 +43,16 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.jsx', '.js'],
+    extensions: [".tsx", ".ts", ".jsx", ".js"],
     alias: {
-      '@': path.resolve(__dirname, 'src/'),
-      '@public': path.resolve(__dirname, 'public/'),
+      "@": path.resolve(__dirname, "src/"),
+      "@public": path.resolve(__dirname, "public/"),
     },
   },
 };
